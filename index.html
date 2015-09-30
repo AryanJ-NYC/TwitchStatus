@@ -6,13 +6,12 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="css/custom.css">
-    
-    <!-- JS scripts -->
-    <script src="js/bootstrap.min.js" async></script>
-    <script src="js/angular.min.js" async></script>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/apps/app.js"></script>
 </head>
-<body>
-    <div class="container">
+<body ng-app="TwitchApp">
+    <div class="container" ng-controller="MainController">
         <div class="row">
             <div class="col-md-offset-4 col-md-4">
                 
@@ -25,16 +24,26 @@
                         <button class="btn btn-default">Online</button>
                     </div>
                 </div>
-                <!-- / Buttons -->
                 
                 <!-- Search form -->
                 <div class="input-group form-inline">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input type="text" class="form-control" placeholder="Search...">
                 </div>
-                <!-- / Search form -->
+                
+                <!-- Channels -->
+                <a href="{{ freeCodeCampJson.url }}">
+                    <div class="channel">
+                        <img class="pull-left img img-responsive img-circle" height="25" width="25" ng-src="{{ freeCodeCampJson.logo }}">
+                        <span class="channel-text">{{ freeCodeCampJson.display_name }}</span>
+                        <img ng-if="">
+                    </div>
+                </a>
+                <div>{{ data }}</div>
                 
             </div>
         </div>
     </div>
+    <!-- JS scripts -->
+    <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
