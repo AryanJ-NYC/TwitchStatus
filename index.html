@@ -32,7 +32,7 @@
                     <a href="{{ channel.url }}">
                         <div class="channel">
                             <img class="pull-left img img-responsive img-circle" height="25" width="25" ng-src="{{ channel.logo }}">
-                            <span class="channel-text">{{ channel.displayName }}</span>
+                            <span class="channel-text">{{ channel.displayName }}<small class="game-description" ng-if="channel.stream">{{ channel.stream.game }}</small></span>
                             <img class="img pull-right" height="30" width="30" ng-if="channel.stream" src="http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/3d-glossy-green-orbs-icons-symbols-shapes/104628-3d-glossy-green-orb-icon-symbols-shapes-check-mark8-sc44.png">
                         </div>
 

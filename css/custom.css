@@ -22,3 +22,8 @@ body {
 .form-control {
     border-radius: 0;
 }
+
+.game-description {
+    margin-left: 10px;
+    color: #ccc;
+}
