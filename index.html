@@ -31,14 +31,15 @@
                 </div>
                 
                 <!-- Channels -->
-                
-                <a href="{{ freeCodeCampJson.url }}">
-                    <div class="channel">
-                        <img class="pull-left img img-responsive img-circle" height="25" width="25" ng-src="{{ freeCodeCampJson.logo }}">
-                        <span class="channel-text">{{ freeCodeCampJson.display_name }}</span>
-                        <img ng-if="">
-                    </div>
-                </a>
+                <div ng-repeat="channel in data">
+                    <a href="{{ channel.url }}">
+                        <div class="channel">
+                            <img class="pull-left img img-responsive img-circle" height="25" width="25" ng-src="{{ channel.logo }}">
+                            <span class="channel-text">{{ channel.displayName }}</span>
+
+                        </div>
+                    </a>
+                </div>
                 <div>{{ data }}</div>
                 
             </div>
