@@ -24,17 +24,18 @@
                 
                 <!-- Search form -->
                 <div class="input-group form-inline">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input type="text" class="form-control" ng-model="searchText" placeholder="Search...">
                 </div>
                 
                 <!-- Channels -->
-                <div ng-repeat="channel in data">
+                <div ng-repeat="channel in data | filter:searchText">
                     <a href="{{ channel.url }}">
                         <div class="channel">
                             <img class="pull-left img img-responsive img-circle" height="25" width="25" ng-src="{{ channel.logo }}">
                             <span class="channel-text">{{ channel.displayName }}</span>
-
+                            <img class="img pull-right" height="30" width="30" ng-if="channel.stream" src="http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/3d-glossy-green-orbs-icons-symbols-shapes/104628-3d-glossy-green-orb-icon-symbols-shapes-check-mark8-sc44.png">
                         </div>
+
                     </a>
                 </div>
                 <div>{{ data }}</div>

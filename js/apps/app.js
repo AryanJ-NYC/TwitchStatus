@@ -14,48 +14,43 @@ twitchApp.controller('MainController', ['$scope', '$http', '$q', function ($scop
                     "medrybw"],
         streamPromises = [],
         channelPromises = [],
-        all = {},
-        online = {},
+        all = [],
+        online = [],
         i;
-    $scope.data = {};
+    $scope.data = [];
     
     for (i = 0; i < channels.length; i++) {
         streamPromises.push($http.get(baseStreamUrl + channels[i]));
         channelPromises.push($http.get(baseChannelUrl + channels[i]));
     }
     
-    $q.all(streamPromises).then(function (array) {
-        for (i = 0; i < array.length; i++) {
-            var channelName = channels[i];
-            $scope.data[channelName] = {};
-            $scope.data[channelName].stream = array[i].data.stream;
-        }
-    });
+    channelPromises = $q.all(channelPromises);
+    streamPromises = $q.all(streamPromises);
     
-    $q.all(channelPromises).then(function (channelData) {
+    $q.all([channelPromises, streamPromises]).then(function (data) {
+        var channelData = data[0],
+            streamData = data[1];
         for (i = 0; i < channelData.length; i++) {
             var channelName = channels[i];
-
-            $scope.data[channelName].displayName = channelData[i].data.display_name;
+            $scope.data.push({});
+            $scope.data[i].displayName = channelData[i].data.display_name;
             if (channelData[i].data.logo) {
-                $scope.data[channelName].logo = channelData[i].data.logo;
+                $scope.data[i].logo = channelData[i].data.logo;
             } else {
-                $scope.data[channelName].logo = "http://placehold.it/300";
+                $scope.data[i].logo = "http://placehold.it/300";
             }
-            $scope.data[channelName].url = channelData[i].data.url;
+            $scope.data[i].stream = streamData[i].data.stream;
+            $scope.data[i].url = channelData[i].data.url;
+            $scope.$apply;
         }
     });
     
     all = $scope.data;
     
     $scope.onlineClickEvent = function () {
-        for (channel in $scope.data) {
-            if ($scope.data.hasOwnProperty(channel)) {
-                console.log($scope.data[channel].stream);
-                if ($scope.data[channel].stream) {
-                    online[channel] = $scope.data[channel];
-                    console.log("Hey");
-                }
+        for (i = 0; i < $scope.data.length; i++) {
+            if ($scope.data[i].stream) {
+                online.push($scope.data[i]);
             }
         }
         $scope.data = online;
