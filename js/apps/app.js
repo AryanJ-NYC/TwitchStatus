@@ -10,11 +10,15 @@ twitchApp.controller('MainController', ['$scope', '$http', '$q', function ($scop
                     "RobotCaleb",
                     "thomasballinger",
                     "noobs2ninjas",
-                    "beohoff"],
+                    "beohoff",
+                    "medrybw"],
         streamPromises = [],
         channelPromises = [],
+        all = {},
+        online = {},
         i;
     $scope.data = {};
+    
     for (i = 0; i < channels.length; i++) {
         streamPromises.push($http.get(baseStreamUrl + channels[i]));
         channelPromises.push($http.get(baseChannelUrl + channels[i]));
@@ -41,4 +45,23 @@ twitchApp.controller('MainController', ['$scope', '$http', '$q', function ($scop
             $scope.data[channelName].url = channelData[i].data.url;
         }
     });
+    
+    all = $scope.data;
+    
+    $scope.onlineClickEvent = function () {
+        for (channel in $scope.data) {
+            if ($scope.data.hasOwnProperty(channel)) {
+                console.log($scope.data[channel].stream);
+                if ($scope.data[channel].stream) {
+                    online[channel] = $scope.data[channel];
+                    console.log("Hey");
+                }
+            }
+        }
+        $scope.data = online;
+    };
+    
+    $scope.allClickEvent = function () {
+        $scope.data = all;
+    };
 }]);
