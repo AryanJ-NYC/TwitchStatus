@@ -1,50 +1,53 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Twitch Status</title>
-    <!-- CSS stylesheets -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" type="text/css" href="css/custom.css">
-</head>
-<body ng-app="TwitchApp">
-    <div class="container" ng-controller="MainController">
-        <div class="row">
-            <div class="col-md-offset-4 col-md-4">
-                
-                <!-- Buttons -->
-                <div class="btn-group-justified" role="group">
-                    <div class="btn-group">
-                        <button class="btn btn-default" ng-click="allClickEvent()">All</button>
-                    </div>
-                    <div class="btn-group">
-                        <button class="btn btn-default" ng-click="onlineClickEvent()">Online</button>
-                    </div>
-                </div>
-                
-                <!-- Search form -->
-                <div class="input-group form-inline">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input type="text" class="form-control" ng-model="searchText" placeholder="Search...">
-                </div>
-                
-                <!-- Channels -->
-                <div ng-repeat="channel in data | filter:searchText">
-                    <a href="{{ channel.url }}">
-                        <div class="channel">
-                            <img class="pull-left img img-responsive img-circle" height="25" width="25" ng-src="{{ channel.logo }}">
-                            <span class="channel-text">{{ channel.displayName }}<small class="game-description" ng-if="channel.stream">{{ channel.stream.game }}</small></span>
-                            <img class="img pull-right" height="30" width="30" ng-if="channel.stream" src="http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/3d-glossy-green-orbs-icons-symbols-shapes/104628-3d-glossy-green-orb-icon-symbols-shapes-check-mark8-sc44.png">
-                        </div>
 
-                    </a>
-                </div>
-            </div>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Twitch Status</title>
+  <!-- CSS stylesheets -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="css/custom.css">
+</head>
+
+<body ng-app="TwitchApp">
+  <div class="container" ng-controller="MainController">
+    <div class="row">
+      <div class="col-md-offset-4 col-md-4">
+        <!-- Buttons -->
+        <div class="btn-group-justified" role="group">
+          <div class="btn-group">
+            <button class="btn btn-default" ng-click="allClickEvent()">All</button>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-default" ng-click="onlineClickEvent()">Online</button>
+          </div>
         </div>
+        <!-- Search form -->
+        <div class="input-group form-inline">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+          <input type="text" class="form-control" ng-model="searchText" placeholder="Search...">
+        </div>
+        <!-- Channels -->
+        <div ng-repeat="channel in data | filter:searchText">
+          <a href="{{ channel.url }}">
+            <div class="channel">
+              <img class="pull-left img img-responsive img-circle" height="25" width="25" ng-src="{{ channel.logo }}">
+              <span class="channel-text">{{ channel.displayName }}<small class="game-description" ng-if="channel.stream">{{ channel.stream.game }}</small></span>
+              <img class="img pull-right" height="30" width="30" ng-if="channel.stream" src="http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/3d-glossy-green-orbs-icons-symbols-shapes/104628-3d-glossy-green-orb-icon-symbols-shapes-check-mark8-sc44.png">
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
-    <!-- JS scripts -->
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/angular.min.js"></script>
-    <script src="js/apps/app.js"></script>
+  </div>
+  <!-- JS scripts -->
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/apps/app.js"></script>
 </body>
+
 </html>
